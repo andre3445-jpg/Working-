@@ -43,163 +43,109 @@ public class Empresa {
      this.myRutas.add(new Ruta("R04","Cucuta","Cartagena",220000.0f));
  }
 
- //PROFESORA: REVISARR NO SE ESPERA DE ESTA MANERA.... USTED TIENE ARRIBA OBJETOS CREADOS EN UN ARRAYLIST, QUE ARRANCA DESDE POSICIÓN O
- private void inicializarSalidas(){
-     this.mySalidas.add(new SalidaProgramada("S001",new GregorianCalendar(2026,03,15,06,00,00),
-             this.myBuses.stream().filter(b -> b.getPlaca().equals("KAA-101")).findFirst().orElse(null),
-             this.myRutas.stream().filter(b -> b.getCodigo().equals("R01")).findFirst().orElse(null),"PROGRAMADO"));
-     
-     this.mySalidas.add(new SalidaProgramada("S002",new GregorianCalendar(2026,03,15,14,00,00),
-             this.myBuses.stream().filter(b -> b.getPlaca().equals("KBB-202")).findFirst().orElse(null),
-             this.myRutas.stream().filter(b -> b.getCodigo().equals("R01")).findFirst().orElse(null),"PROGRAMADO"));
-     
-     this.mySalidas.add(new SalidaProgramada("S003",new GregorianCalendar(2026,03,16,07,00,00),
-             this.myBuses.stream().filter(b -> b.getPlaca().equals("KCC-303")).findFirst().orElse(null),
-             this.myRutas.stream().filter(b -> b.getCodigo().equals("R02")).findFirst().orElse(null),"PROGRAMADO"));
-     
-     this.mySalidas.add(new SalidaProgramada("S004",new GregorianCalendar(2026,03,16,20,00,00),
-             this.myBuses.stream().filter(b -> b.getPlaca().equals("KDD-404")).findFirst().orElse(null),
-             this.myRutas.stream().filter(b -> b.getCodigo().equals("R02")).findFirst().orElse(null),"PROGRAMADO"));
-     
-     this.mySalidas.add(new SalidaProgramada("S005",new GregorianCalendar(2026,03,17,05,30,00),
-             this.myBuses.stream().filter(b -> b.getPlaca().equals("KFF-606")).findFirst().orElse(null),
-             this.myRutas.stream().filter(b -> b.getCodigo().equals("R03")).findFirst().orElse(null),"PROGRAMADO"));
-     
-     this.mySalidas.add(new SalidaProgramada("S006",new GregorianCalendar(2026,03,17,18,00,00),
-             this.myBuses.stream().filter(b -> b.getPlaca().equals("KAA-101")).findFirst().orElse(null),
-             this.myRutas.stream().filter(b -> b.getCodigo().equals("R03")).findFirst().orElse(null),"PROGRAMADO"));
-     
-     this.mySalidas.add(new SalidaProgramada("S007",new GregorianCalendar(2026,03,18,06,30,00),
-             this.myBuses.stream().filter(b -> b.getPlaca().equals("KCC-303")).findFirst().orElse(null),
-             this.myRutas.stream().filter(b -> b.getCodigo().equals("R04")).findFirst().orElse(null),"PROGRAMADO"));
+ private void inicializarSalidas() {
+        this.mySalidas.add(new SalidaProgramada("S001",new GregorianCalendar(2026, 2, 15, 6, 0, 0),this.myBuses.get(0),this.myRutas.get(0),"PROGRAMADA"));
 
-     this.mySalidas.add(new SalidaProgramada("S008",new GregorianCalendar(2026,03,18,19,30,00),
-             this.myBuses.stream().filter(b -> b.getPlaca().equals("KBB-202")).findFirst().orElse(null),
-             this.myRutas.stream().filter(b -> b.getCodigo().equals("R04")).findFirst().orElse(null),"PROGRAMADO"));
+        this.mySalidas.add(new SalidaProgramada("S002",new GregorianCalendar(2026, 2, 15, 14, 0, 0),this.myBuses.get(1),this.myRutas.get(0),"PROGRAMADA"));
 
-}
+        this.mySalidas.add(new SalidaProgramada("S003",new GregorianCalendar(2026, 2, 16, 7, 0, 0),this.myBuses.get(2),this.myRutas.get(1),"PROGRAMADA"));
+
+        this.mySalidas.add(new SalidaProgramada("S004",new GregorianCalendar(2026, 2, 16, 20, 0, 0),this.myBuses.get(3),this.myRutas.get(1),"PROGRAMADA"));
+
+        this.mySalidas.add(new SalidaProgramada("S005",new GregorianCalendar(2026, 2, 17, 5, 30, 0),this.myBuses.get(5),this.myRutas.get(2),"PROGRAMADA"));
+
+        this.mySalidas.add(new SalidaProgramada("S006",new GregorianCalendar(2026, 2, 17, 18, 0, 0),this.myBuses.get(0),this.myRutas.get(2),"PROGRAMADA"));
+
+        this.mySalidas.add(new SalidaProgramada("S007",new GregorianCalendar(2026, 2, 18, 6, 30, 0),this.myBuses.get(2),this.myRutas.get(3),"PROGRAMADA"));
+
+        this.mySalidas.add(new SalidaProgramada("S008",new GregorianCalendar(2026, 2, 18, 19, 30, 0),this.myBuses.get(1),this.myRutas.get(3),"PROGRAMADA"));
+    }
  
  /* RF1 Parametrizar el sistema: gestionar rutas, buses y salidas (crear/listar).
 Validar unicidad (placa, codigoRuta, idSalida) y estados.*/
  
- public String registrarRuta(String codigo, String origen, String destino, float precioBoleto){
- String me="";
- if(this.validarRuta(codigo)){
-   me="LA RUTA YA EXISTE";
- }else{
-   this.myRutas.add(new Ruta(codigo,origen,destino,precioBoleto));
-   me ="LA RUTA:\n"+myRutas.getFirst().toString()+"\n HA SIDO CREADA CON EXITO";
-   }
- return me;}
- 
- 
- public boolean validarRuta(String codigoRuta){
- boolean existe=false;
- for(Ruta r: myRutas){
-     if(r.getCodigo().equalsIgnoreCase(codigoRuta)){
-       existe=true;
-       break;
-     }
- }
- return existe;}
- 
- 
- 
- public String listarRuta(){
- String me="LISTA DE RUTAS ACTUALES:\n";
- 
- for(Ruta r: myRutas){
-     me+=r.toString();
- }
- return me;}
- 
- 
-  public String registrarBus(String placa, String tipoServicio, String estado){
- String me="";
- if(this.validarBus(placa)){
-   me="LA PLACA YA ESTA REGISTRADA";
-   //PROFESORA: return  mens;  Y ELIMINA EL ELSE
- }else{ //quitarlo
-   this.myBuses.add(new Bus(placa,tipoServicio,estado));
-   me ="EL BUS:\n"+myBuses.getFirst().toString()+"\n HA SIDO REGISTRADO CON EXITO";
-   }
- return me;}
- 
- 
-//PROFESORA:  ESTE TIPO DE METODO DEBE SER PRIVATE.
- public boolean validarBus(String placa){
- boolean existe=false;
- for(Bus b: myBuses){
-     if(b.getPlaca().equalsIgnoreCase(placa)){
-       existe=true;
-       break;
-     }
- }
- return existe;}
- 
- 
- public String listarBus(){
- String me="LISTA DE BUCES ACTUALES:\n";
- 
- for(Bus b: myBuses){
-     me+=b.toString();
- }
- return me;}
- 
- 
-  public String registrarSalida(String idSalida, GregorianCalendar fechaHora, Bus myBus, Ruta myRuta, String estadoRuta){
- String me="";
- if(this.validarBus(idSalida)){
-   me="LA SALIDA YA SE ENCUENTRA PROGRAMADA";
- }else{
-   this.mySalidas.add(new SalidaProgramada(idSalida,fechaHora, myBus, myRuta, estadoRuta));
-   me ="LA SALIDA:\n"+mySalidas.getFirst().toString()+"\n HA SIDO PROGRAMADA CON EXITO";
-   }
- return me;}
- 
- //PROFESORA: METODOS DE BUSQUEDA SON PRIVATE
- public boolean validarSalida(String idSalida){
- boolean existe=false;
- for(SalidaProgramada s: mySalidas){
-     if(s.getIdSalida().equalsIgnoreCase(idSalida)){
-       existe=true;
-       break;
-     }
- }
- return existe;}
- 
- 
- 
-  public String listarSalida(){
- String me="LISTA DE SALIDAS PROGRAMADAS:\n";
- 
- for(SalidaProgramada s: mySalidas){
-     me+=s.toString();
- }
- return me;}
- 
- 
-  
-  /*RF2 Venta de pasaje (1 tiquete): seleccionar salida, mostrar sillas disponibles,
-  registrar pasajero y silla, calcular valor y generar tiquete. Actualizar caja y ocupacion.*/
-  
-  public String venderPasaje(){
-  String me="";
-  
-  
-  return me;}
-  
-  /*RF3 Venta ida y vuelta (2 tiquetes en una transacción): seleccionar salida ida y
-  salida regreso, validar misma ruta, sillas disponibles y aplicar descuento del 10%.*/
-  
-  
-  /*RF4 Cancelación de salida: cambiar estado a CANCELADA y gestionar tiquetes VIGENTES 
-  (reprogramar automáticamente a otra salida PROGRAMADA de la misma ruta con cupo, o marcar REEMBOLSADO)
-  . Generar reporte del proceso.*/
-  
-  
-  /*RF5 Reportes del día: (a) ventas por ruta, (b) total vendido, reembolsado e
-  ingreso neto, (c) ventas por mes o un rango de fechas.*/
-  
+ public String registrarRuta(String codigo, String origen, String destino, float precioBoleto) {
+        if (this.validarRuta(codigo)) {
+            return "LA RUTA YA EXISTE";
+        }
+        Ruta nueva = new Ruta(codigo, origen, destino, precioBoleto);
+        this.myRutas.add(nueva);
+        return "LA RUTA:\n" + nueva.toString() + "\nHA SIDO CREADA CON EXITO";
+    }
+
+    private boolean validarRuta(String codigoRuta) {
+        for (Ruta r : myRutas) {
+            if (r.getCodigo().equalsIgnoreCase(codigoRuta)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String listarRuta() {
+        String me = "LISTA DE RUTAS ACTUALES:\n";
+        for (Ruta r : myRutas) {
+            me += r.toString();
+        }
+        return me;
+    }
+
+    public String registrarBus(String placa, String tipoServicio, String estado) {
+        if (this.validarBus(placa)) {
+            return "LA PLACA YA ESTA REGISTRADA";
+        }
+        Bus nuevo = new Bus(placa, tipoServicio, estado);
+        this.myBuses.add(nuevo);
+        return "EL BUS:\n" + nuevo.toString() + "\nHA SIDO REGISTRADO CON EXITO";
+    }
+
+    private boolean validarBus(String placa) {
+        for (Bus b : myBuses) {
+            if (b.getPlaca().equalsIgnoreCase(placa)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String listarBus() {
+        String me = "LISTA DE BUSES ACTUALES:\n";
+        for (Bus b : myBuses) {
+            me += b.toString();
+        }
+        return me;
+    }
+
+    public String registrarSalida(String idSalida, GregorianCalendar fechaHora,
+            Bus myBus, Ruta myRuta, String estadoRuta) {
+        if (this.validarSalida(idSalida)) {
+            return "LA SALIDA YA SE ENCUENTRA PROGRAMADA";
+        }
+        SalidaProgramada nueva = new SalidaProgramada(idSalida, fechaHora, myBus, myRuta, estadoRuta);
+        this.mySalidas.add(nueva);
+        return "LA SALIDA:\n" + nueva.toString() + "\nHA SIDO PROGRAMADA CON EXITO";
+    }
+
+    private boolean validarSalida(String idSalida) {
+        for (SalidaProgramada s : mySalidas) {
+            if (s.getIdSalida().equalsIgnoreCase(idSalida)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String listarSalida() {
+        String me = "LISTA DE SALIDAS PROGRAMADAS:\n";
+        for (SalidaProgramada s : mySalidas) {
+            me += s.toString();
+        }
+        return me;
+    }
+
+    public String venderPasaje() {
+        String me = "";
+        return me;
+    }
 }
 

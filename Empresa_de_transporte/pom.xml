@@ -15,6 +15,6 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>25</maven.compiler.release>
-        <exec.mainClass>ufps.empresa_de_transporte.Empresa_de_transporte</exec.mainClass>
+        <exec.mainClass>Vista.FormPrincipal</exec.mainClass>
     </properties>
 </project>

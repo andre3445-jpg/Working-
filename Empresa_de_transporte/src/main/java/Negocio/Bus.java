@@ -10,7 +10,6 @@ package Negocio;
  */
     public class Bus {
         private String placa;
-        //PRIVATE DE CANTIDADPUESTOS  REVISAR ENUNCIADO
         private String tipoServicio;
         private String estado;
         private Asiento[] asientos;
@@ -28,26 +27,24 @@ package Negocio;
             this.placa = placa;
             this.tipoServicio = tipoServicio;
             this.estado = estado;
-            this.inicializarAsientos(tipoServicio);  //AQUI ESTA ABRIENDO ESPACIO DE MEMORIA AL ARREGLO ASIENTO SEGUN
-            //TIPO DE SERVICIO
-            
-            // PROFESORA: AQUI FALTA OBLIGATORIAMENTE EL LLAMADO DEL METODO PRIVADO DE ACTUALIZAR LOS PUESTOS CREADO...
+            this.asientos = new Asiento[this.determinarCapacidad(tipoServicio)];
+            this.crearAsientos();
         }
 
-        private void inicializarAsientos(String tipo) {
-            int cantidad;
-            if(tipo.equalsIgnoreCase("Ejecutivo")){
-             cantidad = 30;
-            }else if(tipo.equalsIgnoreCase("Normal")){
-             cantidad = 40;
-            }else{ // PROFESORA: NO  ERRADO
-                cantidad = 0;
+        private int determinarCapacidad(String tipo) {
+            if (tipo.equalsIgnoreCase("Ejecutivo")) {
+              return 30;
             }
-            
-            this.asientos = new Asiento[cantidad]; 
-            
+            if (tipo.equalsIgnoreCase("Normal")) {
+              return 40;
+            }
+              return 0;
+            }
+        private void crearAsientos(){
+            for(int i=0; i < this.asientos.length; i++){
+                this.asientos[i] = new Asiento(i + 1, this.tipoServicio);
+            }
         }
-        
         
         public int getCapacidad(){
             return asientos.length;
@@ -76,7 +73,8 @@ package Negocio;
 
         public void setTipoServicio(String tipoServicio) {
             this.tipoServicio = tipoServicio;
-             inicializarAsientos(tipoServicio);
+            this.asientos = new Asiento[this.determinarCapacidad(tipoServicio)];
+            this.crearAsientos();
         }
 
         public void setEstado(String estado) {

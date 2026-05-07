@@ -36,6 +36,7 @@ public class FormRegistrarRuta extends javax.swing.JFrame {
         cmdRegistrarRuta = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtMensaje = new javax.swing.JTextArea();
+        cmdListarRutas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -58,6 +59,13 @@ public class FormRegistrarRuta extends javax.swing.JFrame {
         txtMensaje.setRows(5);
         jScrollPane1.setViewportView(txtMensaje);
 
+        cmdListarRutas.setText("LISTAR");
+        cmdListarRutas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdListarRutasActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -78,7 +86,8 @@ public class FormRegistrarRuta extends javax.swing.JFrame {
                             .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtTarifa, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(cmdListarRutas, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
                 .addContainerGap())
@@ -88,6 +97,9 @@ public class FormRegistrarRuta extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(20, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
@@ -106,10 +118,9 @@ public class FormRegistrarRuta extends javax.swing.JFrame {
                             .addComponent(txtTarifa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cmdRegistrarRuta)
-                        .addGap(43, 43, 43))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(20, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmdListarRutas)
+                        .addGap(22, 22, 22))))
         );
 
         pack();
@@ -117,9 +128,29 @@ public class FormRegistrarRuta extends javax.swing.JFrame {
 
     private void cmdRegistrarRutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdRegistrarRutaActionPerformed
         // TODO add your handling code here:
+        
+        String codigo = txtCodigo.getText().trim();
+        String origen = txtOrigen.getText().trim();
+        String destino = txtDestino.getText().trim();
+        String tarifaStr = txtTarifa.getText().trim();
+
+        if (codigo.isEmpty() || origen.isEmpty() || destino.isEmpty() || tarifaStr.isEmpty()) {
+        txtMensaje.setText("TODOS LOS CAMPOS SON OBLIGATORIOS");
+        return;
+    }
+        
+        float tarifa = Float.parseFloat(tarifaStr);
+        String resultado = myPrincipal.getMyEmpresa().registrarRuta(codigo, origen, destino, tarifa);
+        txtMensaje.setText(resultado);
     }//GEN-LAST:event_cmdRegistrarRutaActionPerformed
 
+    private void cmdListarRutasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdListarRutasActionPerformed
+        // TODO add your handling code here:
+        txtMensaje.setText(myPrincipal.getMyEmpresa().listarRuta());
+    }//GEN-LAST:event_cmdListarRutasActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cmdListarRutas;
     private javax.swing.JButton cmdRegistrarRuta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

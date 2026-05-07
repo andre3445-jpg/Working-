@@ -136,6 +136,9 @@ public class FormCaja extends javax.swing.JFrame {
 
     private void cmdActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdActualizarActionPerformed
         // TODO add your handling code here:
+        txtTotalVentas.setText("$0");
+        txtTotalRembolsos.setText("$0");
+        txtIngresoNeto.setText("$0");
       
 
     }//GEN-LAST:event_cmdActualizarActionPerformed

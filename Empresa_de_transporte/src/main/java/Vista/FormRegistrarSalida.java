@@ -165,11 +165,18 @@ public class FormRegistrarSalida extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdRegistrarSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdRegistrarSalidaActionPerformed
-           
+           String idSalida = txtIdSalida.getText().trim();
+
+          if (idSalida.isEmpty()) {
+          txtMensaje.setText("EL ID DE SALIDA NO PUEDE ESTAR VACIO");
+          return;
+        }
+          String resultado = myFormPrinc.getMyEmpresa().listarSalida();
+          txtMensaje.setText(resultado);
     }//GEN-LAST:event_cmdRegistrarSalidaActionPerformed
 
     private void cmdListarSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdListarSalidaActionPerformed
-        
+        txtMensaje.setText(myFormPrinc.getMyEmpresa().listarSalida());
     }//GEN-LAST:event_cmdListarSalidaActionPerformed
 
     /**
