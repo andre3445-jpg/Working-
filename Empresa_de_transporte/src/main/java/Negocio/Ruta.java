@@ -66,6 +66,12 @@ public class Ruta {
                 "\nprecioBoleto= " + precioBoleto+"\n";
     }
     
+    public String origenDestino(){
+      String me ="";
+      me=this.origen+" a "+this.destino;
+      return me;
+    }
+    
    
     
     

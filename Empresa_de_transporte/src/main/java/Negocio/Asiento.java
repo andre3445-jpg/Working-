@@ -1,7 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
+
 package Negocio;
 
 /**
@@ -10,38 +8,38 @@ package Negocio;
  */
 public class Asiento {
     private int numAsiento;
-    private String tipoAsiento;
+    private String estadoAsiento;
 
     public Asiento() {
         this.numAsiento = 0;
-        this.tipoAsiento = null;
+        this.estadoAsiento = null;
     }
 
     public Asiento(int numAsiento, String tipoAsiento) {
         this.numAsiento = numAsiento;
-        this.tipoAsiento = tipoAsiento;
+        this.estadoAsiento = tipoAsiento;
     }
 
     public int getNumAsiento() {
         return numAsiento;
     }
 
-    public String getTipoAsiento() {
-        return tipoAsiento;
+    public String getEstadoAsiento() {
+        return estadoAsiento;
     }
 
     public void setNumAsiento(int numAsiento) {
         this.numAsiento = numAsiento;
     }
 
-    public void setTipoAsiento(String tipoAsiento) {
-        this.tipoAsiento = tipoAsiento;
+    public void setEstadoAsiento(String estadoAsiento) {
+        this.estadoAsiento = estadoAsiento;
     }
 
     @Override
     public String toString() {
         return "\nNumero de Asiento= " + numAsiento 
-                +"\nTipo de Asiento= " + tipoAsiento;
+                +"\tEstado de Aiento de Asiento= " + estadoAsiento;
     }
     
     

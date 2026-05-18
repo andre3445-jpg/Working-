@@ -11,6 +11,7 @@ public class Ticket {
     private String estadoTicket;
     private float valorPagar;
     private SalidaProgramada mySalida;
+    private Pasajero myPasajero;
     
     public Ticket(){
     

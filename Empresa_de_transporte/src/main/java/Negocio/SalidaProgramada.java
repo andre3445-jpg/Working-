@@ -1,25 +1,21 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
+
 package Negocio;
+import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 /**
  *
  * @author LENOVO LOQ
  */
 
-// NO COLOCAR ATRIBUTOS QUE NO ESTAN CONTEMPLADOS EN EL NEGOCIO
 public class SalidaProgramada {
     private String idSalida;
     private GregorianCalendar fechaHora;
-    private Asiento[] myAsientos; //Asientos del bus para esta salida//NOOO
     private Bus myBus;
     private Ruta myRuta;
     private String estadoRuta;
     
     public SalidaProgramada(){
-       this.myAsientos= new Asiento[0];
        this.idSalida=null;
        this.fechaHora = null;
        this.myBus=null;
@@ -31,7 +27,6 @@ public class SalidaProgramada {
     public SalidaProgramada(String idSalida, GregorianCalendar fechaHora, Bus myBus, Ruta myRuta, String estadoRuta) {
         this.idSalida = idSalida;
         this.fechaHora = fechaHora;
-        this.myAsientos = new Asiento[myBus.getCapacidad()];
         this.myBus = myBus;
         this.myRuta = myRuta;
         this.estadoRuta=estadoRuta;
@@ -47,9 +42,6 @@ public class SalidaProgramada {
         return fechaHora;
     }
 
-    public Asiento[] getMyAsientos() {
-        return myAsientos;
-    }
 
     public Bus getMyBus() {
         return myBus;
@@ -70,9 +62,7 @@ public class SalidaProgramada {
         this.fechaHora = fechaHora;
     }   
 
-    public void setMyAsientos(Asiento[] myAsientos) {
-        this.myAsientos = myAsientos;
-    }
+   
 
     public void setMyBus(Bus myBus) {
         this.myBus = myBus;
@@ -82,13 +72,19 @@ public class SalidaProgramada {
         this.myRuta = myRuta;
     }   
 
+    private String cambiarFormato(){
+      String formatoSimple="";
+      SimpleDateFormat nuevoFormato = new SimpleDateFormat("HH:mm dd/MM/yyyy");
+      formatoSimple = nuevoFormato.format(fechaHora.getTime());
+      return formatoSimple;
+    }
+    
     @Override
     public String toString() {
-        return "\nidSalida= " + idSalida +
-                "\nfechaHora= " + fechaHora + 
-                "\nCapacidad= " + myAsientos.length +
-                "\nBus= " + myBus.getPlaca() + 
-                "\nRuta= " + myRuta+"\n";
+        return "\nidSalida: " + idSalida +
+                "\nfechaHora: " + cambiarFormato() +
+                "\nBus: " + myBus.getPlaca()+ 
+                "\nRuta: " + myRuta.origenDestino()+"\n";
         
     }
     

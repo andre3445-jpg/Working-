@@ -4,6 +4,8 @@
  */
 package Negocio;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author LENOVO LOQ
@@ -22,14 +24,19 @@ package Negocio;
         this.estado=null;
         this.asientos=new Asiento[0];
         }
+ //AQUI ESTA ABRIENDO ESPACIO DE MEMORIA AL ARREGLO ASIENTO SEGUN
+            //TIPO DE SERVICIO (Corregido creo )
 
-        public Bus(String placa, String tipoServicio, String estado) {
+        public Bus(String placa, String tipoServicio) {
             this.placa = placa;
             this.tipoServicio = tipoServicio;
-            this.estado = estado;
+            this.estado = "DISPONIBLE";
             this.asientos = new Asiento[this.determinarCapacidad(tipoServicio)];
             this.crearAsientos();
         }
+        // PROFESORA: AQUI FALTA OBLIGATORIAMENTE EL LLAMADO DEL METODO PRIVADO DE ACTUALIZAR LOS 
+        //PUESTOS CREADO...
+
 
         private int determinarCapacidad(String tipo) {
             if (tipo.equalsIgnoreCase("Ejecutivo")) {
@@ -42,14 +49,17 @@ package Negocio;
             }
         private void crearAsientos(){
             for(int i=0; i < this.asientos.length; i++){
-                this.asientos[i] = new Asiento(i + 1, this.tipoServicio);
+                this.asientos[i] = new Asiento(i + 1, "Disponible");
             }
         }
         
-        public int getCapacidad(){
+        private int getCapacidad(){
             return asientos.length;
         }
-
+        public int capacidad(){
+          int cap= this.getCapacidad();
+            return cap;
+        }
 
         public String getPlaca() {
             return placa;
@@ -73,8 +83,7 @@ package Negocio;
 
         public void setTipoServicio(String tipoServicio) {
             this.tipoServicio = tipoServicio;
-            this.asientos = new Asiento[this.determinarCapacidad(tipoServicio)];
-            this.crearAsientos();
+            
         }
 
         public void setEstado(String estado) {
@@ -87,12 +96,52 @@ package Negocio;
        
        /**PROFESORA:  OJOO QUE BUS DEBE MANIPULAR LAS PARTES..**/
 
+        public String mostrarAsiento(){
+          String me="";
+            for (Asiento a : this.asientos){
+              me += a.toString();
+            }
+          return me;
+        }
+        
+        /*Metodo para mostrar solo los asientos disponibles*/
+            public ArrayList mostrarAsientoDisponible(){
+          ArrayList<String> me =new ArrayList<>();
+          String numeroPuesto="";
+            for (Asiento a : this.asientos){
+             if(a.getEstadoAsiento().equalsIgnoreCase("Disponible")){
+                me.add(numeroPuesto+=a.getNumAsiento());
+                numeroPuesto="";
+             }
+            }
+          return me;
+        }
+        
+        
+        /*Este metodo carga en un vector tipo string la informacion del estado de los asientos en orden, el numero del asiento
+        equivale al indice del vector +1 (i+1) 
+        */
+        public String[] estadoAsientos(){
+         String[] asientos;
+        asientos= new String[this.asientos.length];
+        for(int i=0; i< asientos.length; i++){
+          asientos[i]=this.asientos[i].getEstadoAsiento();
+        }
+        
+        return asientos;}
+        
+        /*Metodo para cambiar el estado del asiento a "OCUPADO"*/
+        public void ocuparAsiento(int numeroAsiento){
+            this.asientos[numeroAsiento-1].setEstadoAsiento("OCUPADO");
+        }
+        
+        
         @Override
         public String toString() {
-            return "\nplaca= " + placa + 
-                    "\ntipoServicio= " + tipoServicio + 
-                    "\nestado= " + estado + 
-                    "\ncapacidad= " + getCapacidad()+"\n";
+            return "\nplaca: " + placa + 
+                    "\nipoServicio: " + tipoServicio + 
+                    "\nEstado: " + estado + 
+                    "\nCapacidad: " + getCapacidad()+"\n";
         }
 
 
