@@ -43,6 +43,10 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="cmdSalida" min="-2" pref="152" max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="201" max="-2" attributes="0"/>
+                      <Component id="cmdFormularioPrueba" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace pref="32" max="32767" attributes="0"/>
           </Group>
@@ -51,7 +55,9 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace pref="82" max="32767" attributes="0"/>
+              <EmptySpace pref="41" max="32767" attributes="0"/>
+              <Component id="cmdFormularioPrueba" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="cmdCaja" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="cmdVenderPasaje" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -106,6 +112,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdVenderPasajeActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="cmdFormularioPrueba">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Formulario Prueba"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdFormularioPruebaActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

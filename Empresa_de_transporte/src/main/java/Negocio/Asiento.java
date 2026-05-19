@@ -39,7 +39,7 @@ public class Asiento {
     @Override
     public String toString() {
         return "\nNumero de Asiento= " + numAsiento 
-                +"\tEstado de Aiento de Asiento= " + estadoAsiento;
+                +"\tEstado de Asiento= " + estadoAsiento;
     }
     
     

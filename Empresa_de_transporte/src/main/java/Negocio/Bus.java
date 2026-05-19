@@ -147,8 +147,26 @@ import java.util.ArrayList;
 
 
 //Comentaario de prueba
+        
+        private String listarAsientosInversos(){
+            String me="";
+            
+            for(int i= this.asientos.length-1; i>=0; i--){
+                me+= this.asientos[i].toString();
+            }
+            
+            
+            
+            
+            return me; 
+        }
+        
 
-
+        public String listarIntercalado(){
+            return "Placa : "+this.placa +"\t Tipo Servicio: "+this.tipoServicio +"\t estado : "+this.estado+"\t capacidad : "+this.asientos.length+
+                    "\n********************* PUESTOS O SILLAS **************************\n"+
+                    this.listarAsientosInversos();
+        }
 
 
 

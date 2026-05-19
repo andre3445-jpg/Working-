@@ -310,6 +310,50 @@ Validar unicidad (placa, codigoRuta, idSalida) y estados.*/
           me=this.buscarBus(placa).mostrarAsientoDisponible();
           return me;
         }
+         
+         
+        //--------------------------------------------------------------------------------------------//
+         
+         public String listarBusSustentacion(){
+             String me="";
+             ArrayList<Bus> myNormales = new ArrayList<>();
+             ArrayList<Bus> myEjecutivos = new ArrayList<>();
+             myNormales = this.BuscarNormales();
+             myEjecutivos = this.BuscarEjecutivos();
+             
+             for(int i=0; i<myNormales.size();i++){
+                 if(i< myEjecutivos.size()){
+                     me+=myEjecutivos.get(i).listarIntercalado()+"\n";
+                 }
+                 me+=myNormales.get(i).listarIntercalado()+"\n";
+             }
+             return me;    
+         }
+         
+           private ArrayList BuscarNormales(){
+               ArrayList<Bus> myNorm = new ArrayList<>();
+               for(Bus b:this.myBuses){
+                   if(b.getTipoServicio().equalsIgnoreCase("NORMAL")){
+                       myNorm.add(b);
+                   }
+               }
+               return myNorm;
+           }
+           
+           private ArrayList BuscarEjecutivos(){
+               ArrayList<Bus> myEject = new ArrayList<>();
+               for(Bus b:this.myBuses){
+                   if(b.getTipoServicio().equalsIgnoreCase("EJECUTIVO")){
+                       myEject.add(b);
+                   }
+               }
+               return myEject;
+           }
+         
+         
+         
+         
+         
         
 }
 
