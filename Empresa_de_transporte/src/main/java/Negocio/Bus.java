@@ -163,7 +163,7 @@ import java.util.ArrayList;
         
 
         public String listarIntercalado(){
-            return "Placa : "+this.placa +"\t Tipo Servicio: "+this.tipoServicio +"\t estado : "+this.estado+"\t capacidad : "+this.asientos.length+
+            return "\nPlaca : "+this.placa +"\t Tipo Servicio: "+this.tipoServicio +"\t estado : "+this.estado+"\t capacidad : "+this.asientos.length+
                     "\n********************* PUESTOS O SILLAS **************************\n"+
                     this.listarAsientosInversos();
         }
