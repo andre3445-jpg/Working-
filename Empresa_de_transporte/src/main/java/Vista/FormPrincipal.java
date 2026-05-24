@@ -22,7 +22,7 @@ public class FormPrincipal extends javax.swing.JFrame {
     private FormVenderTicket myFormVender;
     
     
-    private FormSustentaciónAv1 myFormPrueba;
+ 
  
     public FormPrincipal() {
         initComponents();
@@ -49,7 +49,6 @@ public class FormPrincipal extends javax.swing.JFrame {
         cmdBus = new javax.swing.JButton();
         cmdSalida = new javax.swing.JButton();
         cmdVenderPasaje = new javax.swing.JButton();
-        cmdFormularioPrueba = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,13 +87,6 @@ public class FormPrincipal extends javax.swing.JFrame {
             }
         });
 
-        cmdFormularioPrueba.setText("Formulario Prueba");
-        cmdFormularioPrueba.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdFormularioPruebaActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -112,18 +104,13 @@ public class FormPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cmdBus, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cmdSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(201, 201, 201)
-                        .addComponent(cmdFormularioPrueba)))
+                        .addComponent(cmdSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(41, Short.MAX_VALUE)
-                .addComponent(cmdFormularioPrueba)
-                .addGap(18, 18, 18)
+                .addContainerGap(82, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmdCaja)
                     .addComponent(cmdVenderPasaje))
@@ -164,12 +151,6 @@ public class FormPrincipal extends javax.swing.JFrame {
         this.myFormVender.setVisible(true);
     }//GEN-LAST:event_cmdVenderPasajeActionPerformed
 
-    private void cmdFormularioPruebaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdFormularioPruebaActionPerformed
-        // TODO add your handling code here:
-        this.myFormPrueba = new FormSustentaciónAv1(this);
-        this.myFormPrueba.setVisible(true);
-    }//GEN-LAST:event_cmdFormularioPruebaActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -198,7 +179,6 @@ public class FormPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdBus;
     private javax.swing.JButton cmdCaja;
-    private javax.swing.JButton cmdFormularioPrueba;
     private javax.swing.JButton cmdRuta;
     private javax.swing.JButton cmdSalida;
     private javax.swing.JButton cmdVenderPasaje;

@@ -20,9 +20,11 @@ public class FormRegistrarSalida extends javax.swing.JFrame {
         this.myFormPrinc=fp;
         initComponents();
         
+        this.cargarIdeSalida();
+        this.cargarRutas();
         SpinnerDateModel modeloHora =new SpinnerDateModel();
         this.spnHora.setModel(modeloHora);
-        JSpinner.DateEditor editor =new JSpinner.DateEditor(spnHora,"HH:mm:ss");
+        JSpinner.DateEditor editor =new JSpinner.DateEditor(spnHora,"HH:mm");
         
         this.spnHora.setEditor(editor);
         
@@ -42,7 +44,6 @@ public class FormRegistrarSalida extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         cmbBus = new javax.swing.JComboBox<>();
         cmbRuta = new javax.swing.JComboBox<>();
-        txtIdSalida = new javax.swing.JTextField();
         spnHora = new javax.swing.JSpinner();
         cmdRegistrarSalida = new javax.swing.JButton();
         jdtFecha = new com.toedter.calendar.JDateChooser();
@@ -51,18 +52,17 @@ public class FormRegistrarSalida extends javax.swing.JFrame {
         cmdListarSalida = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtMensaje = new javax.swing.JTextArea();
+        lblIdSalida = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("ID SALIDA");
+        jLabel1.setText("ID SALIDA:");
 
         jLabel2.setText("RUTA:");
 
         jLabel3.setText("BUS:");
 
         cmbBus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR" }));
-
-        cmbRuta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECCIONAR" }));
 
         cmdRegistrarSalida.setText("REGISTRAR SALIDA");
         cmdRegistrarSalida.addActionListener(new java.awt.event.ActionListener() {
@@ -86,6 +86,8 @@ public class FormRegistrarSalida extends javax.swing.JFrame {
         txtMensaje.setRows(5);
         jScrollPane1.setViewportView(txtMensaje);
 
+        lblIdSalida.setText("------");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -100,16 +102,16 @@ public class FormRegistrarSalida extends javax.swing.JFrame {
                             .addGap(18, 18, 18)
                             .addComponent(cmbBus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jdtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(txtIdSalida)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cmbRuta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jdtFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+                                    .addComponent(lblIdSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -118,24 +120,20 @@ public class FormRegistrarSalida extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1)
                     .addComponent(cmdListarSalida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(16, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(138, 138, 138)
-                    .addComponent(cmbRuta, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(302, Short.MAX_VALUE)))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtIdSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
+                    .addComponent(lblIdSalida))
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(cmdListarSalida))
+                    .addComponent(cmdListarSalida)
+                    .addComponent(cmbRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -154,25 +152,14 @@ public class FormRegistrarSalida extends javax.swing.JFrame {
                         .addComponent(cmdRegistrarSalida))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(93, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(73, 73, 73)
-                    .addComponent(cmbRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(305, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdRegistrarSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdRegistrarSalidaActionPerformed
-           String idSalida = txtIdSalida.getText().trim();
-
-          if (idSalida.isEmpty()) {
-          txtMensaje.setText("EL ID DE SALIDA NO PUEDE ESTAR VACIO");
-          return;
-        }
-          String resultado = myFormPrinc.getMyEmpresa().listarSalida();
-          txtMensaje.setText(resultado);
+           
+   
     }//GEN-LAST:event_cmdRegistrarSalidaActionPerformed
 
     private void cmdListarSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdListarSalidaActionPerformed
@@ -183,7 +170,16 @@ public class FormRegistrarSalida extends javax.swing.JFrame {
      * @param args the command line arguments
      */
 
+private void cargarIdeSalida(){
+ String me=this.myFormPrinc.getMyEmpresa().generarIdSalida();
+ this.lblIdSalida.setText(me);
+}
 
+private void cargarRutas(){
+for(String s: this.myFormPrinc.getMyEmpresa().mostrarRutaComboBox()){
+    this.cmbRuta.addItem(s);
+}
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cmbBus;
     private javax.swing.JComboBox<String> cmbRuta;
@@ -196,8 +192,8 @@ public class FormRegistrarSalida extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private com.toedter.calendar.JDateChooser jdtFecha;
+    private javax.swing.JLabel lblIdSalida;
     private javax.swing.JSpinner spnHora;
-    private javax.swing.JTextField txtIdSalida;
     private javax.swing.JTextArea txtMensaje;
     // End of variables declaration//GEN-END:variables
 }

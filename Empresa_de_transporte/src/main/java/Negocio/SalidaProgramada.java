@@ -11,6 +11,7 @@ import java.util.GregorianCalendar;
 public class SalidaProgramada {
     private String idSalida;
     private GregorianCalendar fechaHora;
+    private GregorianCalendar fechaHoraRetorno;
     private Bus myBus;
     private Ruta myRuta;
     private String estadoRuta;
@@ -30,6 +31,7 @@ public class SalidaProgramada {
         this.myBus = myBus;
         this.myRuta = myRuta;
         this.estadoRuta=estadoRuta;
+        this.calcularHoraFechaRetorno();
     }
 
     
@@ -49,6 +51,14 @@ public class SalidaProgramada {
 
     public Ruta getMyRuta() {
         return myRuta;
+    }
+
+    public GregorianCalendar getFechaHoraRetorno() {
+        return fechaHoraRetorno;
+    }
+
+    public String getEstadoRuta() {
+        return estadoRuta;
     }
 
     
@@ -77,6 +87,28 @@ public class SalidaProgramada {
       SimpleDateFormat nuevoFormato = new SimpleDateFormat("HH:mm dd/MM/yyyy");
       formatoSimple = nuevoFormato.format(fechaHora.getTime());
       return formatoSimple;
+    }
+    
+
+    private void calcularHoraFechaRetorno(){
+      switch(this.myRuta.getDestino()){
+          case "Bucaramanga": 
+              this.fechaHoraRetorno=(GregorianCalendar)this.fechaHora;
+              this.fechaHoraRetorno.add(GregorianCalendar.HOUR_OF_DAY, 4);
+          break; 
+          case "Bogotá": 
+              this.fechaHoraRetorno=(GregorianCalendar)this.fechaHora;
+              this.fechaHoraRetorno.add(GregorianCalendar.HOUR_OF_DAY, 13);
+          break;
+          case "Medellin": 
+              this.fechaHoraRetorno=(GregorianCalendar)this.fechaHora;
+              this.fechaHoraRetorno.add(GregorianCalendar.HOUR_OF_DAY, 14);
+          break;
+          case "Cartagena": 
+              this.fechaHoraRetorno=(GregorianCalendar)this.fechaHora;
+              this.fechaHoraRetorno.add(GregorianCalendar.HOUR_OF_DAY, 15);
+          break;
+      }
     }
     
     @Override

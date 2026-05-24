@@ -68,7 +68,7 @@ public class Ruta {
     
     public String origenDestino(){
       String me ="";
-      me=this.origen+" a "+this.destino;
+      me=this.codigo+" "+this.origen+" a "+this.destino;
       return me;
     }
     
