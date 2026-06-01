@@ -10,6 +10,7 @@ package Negocio;
  */
 public class Caja {
     //Atributos
+    private double cajaInicial;
     private float totalVentas; 
     private float totalReembolsos;
     

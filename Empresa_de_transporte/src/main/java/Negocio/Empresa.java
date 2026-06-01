@@ -3,6 +3,7 @@ package Negocio;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.TreeSet;
 
 public class Empresa {
 
@@ -48,28 +49,28 @@ public class Empresa {
 
     private void inicializarSalidas() {
         this.mySalidas.add(new SalidaProgramada("S001", new GregorianCalendar(2026, 2, 15, 6, 0, 0),
-                this.myBuses.get(0), this.myRutas.get(0), "PROGRAMADA"));
+                this.myBuses.get(0), this.myRutas.get(0)));
 
         this.mySalidas.add(new SalidaProgramada("S002", new GregorianCalendar(2026, 2, 15, 14, 0, 0),
-                this.myBuses.get(1), this.myRutas.get(0), "PROGRAMADA"));
+                this.myBuses.get(1), this.myRutas.get(0)));
 
         this.mySalidas.add(new SalidaProgramada("S003", new GregorianCalendar(2026, 2, 16, 7, 0, 0),
-                this.myBuses.get(2), this.myRutas.get(1), "PROGRAMADA"));
+                this.myBuses.get(2), this.myRutas.get(1)));
 
         this.mySalidas.add(new SalidaProgramada("S004", new GregorianCalendar(2026, 2, 16, 20, 0, 0),
-                this.myBuses.get(3), this.myRutas.get(1), "PROGRAMADA"));
+                this.myBuses.get(3), this.myRutas.get(1)));
 
         this.mySalidas.add(new SalidaProgramada("S005", new GregorianCalendar(2026, 2, 17, 5, 30, 0),
-                this.myBuses.get(5), this.myRutas.get(2), "PROGRAMADA"));
+                this.myBuses.get(5), this.myRutas.get(2)));
 
         this.mySalidas.add(new SalidaProgramada("S006", new GregorianCalendar(2026, 2, 17, 18, 0, 0),
-                this.myBuses.get(0), this.myRutas.get(2), "PROGRAMADA"));
+                this.myBuses.get(0), this.myRutas.get(2)));
 
         this.mySalidas.add(new SalidaProgramada("S007", new GregorianCalendar(2026, 2, 18, 6, 30, 0),
-                this.myBuses.get(2), this.myRutas.get(3), "PROGRAMADA"));
+                this.myBuses.get(2), this.myRutas.get(3)));
 
         this.mySalidas.add(new SalidaProgramada("S008", new GregorianCalendar(2026, 2, 18, 19, 30, 0),
-                this.myBuses.get(1), this.myRutas.get(3), "PROGRAMADA"));
+                this.myBuses.get(1), this.myRutas.get(3)));
     }
 
     /* RF1 GESTIÓN DE RUTAS*/
@@ -135,13 +136,13 @@ public class Empresa {
 
     /* RF1 Gestion de Salidas*/
     public String registrarSalida(String idSalida, GregorianCalendar fechaHora,
-            String placa, String codRuta, String estadoRuta) {
+            String placa, String codRuta) {
         if (this.validarSalida(idSalida)) {
             return "LA SALIDA YA SE ENCUENTRA PROGRAMADA";
         }
         Bus b = this.buscarBus(placa);
         Ruta r = this.buscarRuta(codRuta);
-        SalidaProgramada nueva = new SalidaProgramada(idSalida, fechaHora, b, r, estadoRuta);
+        SalidaProgramada nueva = new SalidaProgramada(idSalida, fechaHora, b, r);
         this.mySalidas.add(nueva);
         return "LA SALIDA:\n" + nueva.toString() + "\nHA SIDO PROGRAMADA CON EXITO";
     }
@@ -208,7 +209,6 @@ public class Empresa {
         return id;
     }
 
-  
     /*Metodos de apoyo para combobox de la vista*/
     public ArrayList listarSalidaPrograma() {
         ArrayList<String> salida;
@@ -256,13 +256,6 @@ public class Empresa {
         return asientos;
     }
 
-    
-    
-    
-    
-    
-    
-    
     private Bus buscarBus(String placa) {
         Bus b = null;
         for (Bus c : this.myBuses) {
@@ -300,21 +293,36 @@ public class Empresa {
     }
 
     public ArrayList<String> busDisponibleComboBox(GregorianCalendar fechaHora) {
-        ArrayList<Bus> ocupados = new ArrayList<>();
-        ArrayList<Bus> disponibles = new ArrayList<>();
+        ArrayList<String> bucesDisponibles = new ArrayList<>();
 
-        for (SalidaProgramada s : mySalidas) {
-            if (fechaHora.compareTo(s.getFechaHora()) >= 0 && fechaHora.compareTo(s.getFechaHoraRetorno()) <= 0) {
-                ocupados.add(s.getMyBus());
+        for (Bus b : this.myBuses) {
+            // Excluir buses en mantenimiento
+            if (b.getEstado().equalsIgnoreCase("MANTENIMIENTO")) {
+                continue;
+            }
+
+            boolean ocupado = false;
+            for (SalidaProgramada s : this.mySalidas) {
+                if (s.getMyBus().getPlaca().equalsIgnoreCase(b.getPlaca())) {
+                    boolean enViaje
+                            = fechaHora.compareTo(s.getFechaHora()) >= 0
+                            && fechaHora.compareTo(s.getFechaHoraRetorno()) <= 0;
+
+                    if (enViaje) {
+                        ocupado = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!ocupado) {
+                bucesDisponibles.add(b.getPlaca());
             }
         }
 
-        for (Bus b : ocupados) {
-
-        }
-
-        return null;
+        return bucesDisponibles;
     }
+
 
     /*FUNCIONALIDADES DE MOSTRADO PARA LOS COMBOBOX*/
     private SalidaProgramada buscarSalidaProgramada(String codigoSalida) {
@@ -325,9 +333,6 @@ public class Empresa {
         }
         return null;
     }
-    
     /*requerimiento 5*/
-    
-    
 
 }

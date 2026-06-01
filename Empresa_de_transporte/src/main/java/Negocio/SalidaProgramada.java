@@ -14,23 +14,23 @@ public class SalidaProgramada {
     private GregorianCalendar fechaHoraRetorno;
     private Bus myBus;
     private Ruta myRuta;
-    private String estadoRuta;
+    private String estadoSalida;
     
     public SalidaProgramada(){
        this.idSalida=null;
        this.fechaHora = null;
        this.myBus=null;
        this.myRuta=null;
-       this.estadoRuta =null;
+       this.estadoSalida =null;
     
     }
 
-    public SalidaProgramada(String idSalida, GregorianCalendar fechaHora, Bus myBus, Ruta myRuta, String estadoRuta) {
+    public SalidaProgramada(String idSalida, GregorianCalendar fechaHora, Bus myBus, Ruta myRuta) {
         this.idSalida = idSalida;
         this.fechaHora = fechaHora;
         this.myBus = myBus;
         this.myRuta = myRuta;
-        this.estadoRuta=estadoRuta;
+        this.estadoSalida="PROGRAMADA";
         this.calcularHoraFechaRetorno();
     }
 
@@ -58,7 +58,7 @@ public class SalidaProgramada {
     }
 
     public String getEstadoRuta() {
-        return estadoRuta;
+        return estadoSalida;
     }
 
     
@@ -93,19 +93,20 @@ public class SalidaProgramada {
     private void calcularHoraFechaRetorno(){
       switch(this.myRuta.getDestino()){
           case "Bucaramanga": 
-              this.fechaHoraRetorno=(GregorianCalendar)this.fechaHora;
+              // Bug 5 fix: usar clone() para no modificar fechaHora al sumar horas
+              this.fechaHoraRetorno=(GregorianCalendar)this.fechaHora.clone();
               this.fechaHoraRetorno.add(GregorianCalendar.HOUR_OF_DAY, 4);
           break; 
           case "Bogotá": 
-              this.fechaHoraRetorno=(GregorianCalendar)this.fechaHora;
+              this.fechaHoraRetorno=(GregorianCalendar)this.fechaHora.clone();
               this.fechaHoraRetorno.add(GregorianCalendar.HOUR_OF_DAY, 13);
           break;
           case "Medellin": 
-              this.fechaHoraRetorno=(GregorianCalendar)this.fechaHora;
+              this.fechaHoraRetorno=(GregorianCalendar)this.fechaHora.clone();
               this.fechaHoraRetorno.add(GregorianCalendar.HOUR_OF_DAY, 14);
           break;
           case "Cartagena": 
-              this.fechaHoraRetorno=(GregorianCalendar)this.fechaHora;
+              this.fechaHoraRetorno=(GregorianCalendar)this.fechaHora.clone();
               this.fechaHoraRetorno.add(GregorianCalendar.HOUR_OF_DAY, 15);
           break;
       }
@@ -124,5 +125,8 @@ public class SalidaProgramada {
     
     
 }
+
+
+
 
 

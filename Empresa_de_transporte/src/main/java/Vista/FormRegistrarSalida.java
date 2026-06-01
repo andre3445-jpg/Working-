@@ -4,8 +4,11 @@
  */
 package Vista;
 
+
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 
@@ -13,6 +16,7 @@ import javax.swing.SpinnerDateModel;
 
 public class FormRegistrarSalida extends javax.swing.JFrame {
     private FormPrincipal myFormPrinc;
+    private GregorianCalendar fechaHora;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FormRegistrarSalida.class.getName());
             
@@ -53,6 +57,7 @@ public class FormRegistrarSalida extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtMensaje = new javax.swing.JTextArea();
         lblIdSalida = new javax.swing.JLabel();
+        cmdCargarBuces = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -88,43 +93,55 @@ public class FormRegistrarSalida extends javax.swing.JFrame {
 
         lblIdSalida.setText("------");
 
+        cmdCargarBuces.setText("CARGAR BUCES");
+        cmdCargarBuces.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdCargarBucesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(62, 62, 62)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(cmdRegistrarSalida)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(cmbBus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(cmbRuta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jdtFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
-                                    .addComponent(lblIdSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(spnHora, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(62, 62, 62)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
-                    .addComponent(cmdListarSalida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 67, Short.MAX_VALUE)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(cmbRuta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jdtFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+                                        .addComponent(lblIdSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(spnHora, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cmdCargarBuces)
+                                    .addComponent(cmbBus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(62, 62, 62)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1)
+                            .addComponent(cmdListarSalida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
+                        .addComponent(cmdRegistrarSalida)))
                 .addContainerGap(62, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -148,23 +165,52 @@ public class FormRegistrarSalida extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cmbBus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))
-                        .addGap(35, 35, 35)
-                        .addComponent(cmdRegistrarSalida))
+                        .addGap(18, 18, 18)
+                        .addComponent(cmdCargarBuces))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addComponent(cmdRegistrarSalida)
+                .addGap(61, 61, 61))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdRegistrarSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdRegistrarSalidaActionPerformed
-           
+        String id= this.lblIdSalida.getText();
+        this.captarFechayHora();
+        if (this.fechaHora == null) {
+            this.txtMensaje.setText("SELECCIONE UNA FECHA Y HORA VÁLIDAS PARA CONTINUAR");
+            return;
+        }
+        if (this.cmbRuta.getSelectedItem() == null || this.cmbBus.getSelectedItem() == null) {
+            this.txtMensaje.setText("INGRESE TODOS LOS DATOS PARA PODER CONTINUAR");
+            return;
+        }
+        String ruta= this.cmbRuta.getSelectedItem().toString();
+        String codigoRuta=this.extraerCodigoRuta(ruta);
+        String placa=this.cmbBus.getSelectedItem().toString();
+        if(id.isEmpty()||ruta.isEmpty()||codigoRuta.isEmpty()||placa.isEmpty()){
+            this.txtMensaje.setText("INGRESE TODOS LOS DATOS PARA PODER CONTINUAR");
+        }else{
+        
+        String resultado = this.myFormPrinc.getMyEmpresa().registrarSalida(id, fechaHora, placa, codigoRuta);
+        this.txtMensaje.setText(resultado);
+        this.captarFechayHora();
+        this.cargarBusces();
+        this.cargarIdeSalida();}
    
     }//GEN-LAST:event_cmdRegistrarSalidaActionPerformed
 
     private void cmdListarSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdListarSalidaActionPerformed
         txtMensaje.setText(myFormPrinc.getMyEmpresa().listarSalida());
     }//GEN-LAST:event_cmdListarSalidaActionPerformed
+
+    private void cmdCargarBucesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCargarBucesActionPerformed
+        this.captarFechayHora();
+        this.cargarBusces();
+    }//GEN-LAST:event_cmdCargarBucesActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -180,9 +226,47 @@ for(String s: this.myFormPrinc.getMyEmpresa().mostrarRutaComboBox()){
     this.cmbRuta.addItem(s);
 }
 }
+
+private void cargarBusces(){
+this.cmbBus.removeAllItems();
+ArrayList<String> buces= new ArrayList();
+buces= this.myFormPrinc.getMyEmpresa().busDisponibleComboBox(this.fechaHora);
+for(String b: buces){
+this.cmbBus.addItem(b);
+}
+}
+
+//Este metodo se encarga de convertir los datos del spinner y jcalender en gregorianCalender
+private void captarFechayHora(){
+Date fecha= jdtFecha.getDate();
+Date hora= (Date)spnHora.getValue();
+    GregorianCalendar auxHora= new GregorianCalendar();
+    auxHora.setTime(hora);
+int hH = 0;
+int mm = 0;
+    GregorianCalendar fechaHora= new GregorianCalendar();
+    fechaHora.setTime(fecha);
+    
+    hH= auxHora.get(GregorianCalendar.HOUR_OF_DAY);
+    mm= auxHora.get(GregorianCalendar.MINUTE);
+    
+    fechaHora.set(GregorianCalendar.HOUR_OF_DAY,hH);
+    fechaHora.set(GregorianCalendar.MINUTE,mm);
+    this.fechaHora=fechaHora;
+    
+}
+
+private String extraerCodigoRuta(String ruta){
+String[] me =new String[2];
+me=ruta.split(" ");
+
+return me[0];
+}
+ 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cmbBus;
     private javax.swing.JComboBox<String> cmbRuta;
+    private javax.swing.JToggleButton cmdCargarBuces;
     private javax.swing.JButton cmdListarSalida;
     private javax.swing.JButton cmdRegistrarSalida;
     private javax.swing.JLabel jLabel1;

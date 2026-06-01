@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  * @author LENOVO LOQ
  */
-    public class Bus {
+    public class Bus{
         private String placa;
         private String tipoServicio;
         private String estado;
