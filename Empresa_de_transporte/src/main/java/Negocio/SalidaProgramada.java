@@ -31,7 +31,7 @@ public class SalidaProgramada {
         this.myBus = myBus;
         this.myRuta = myRuta;
         this.estadoSalida="PROGRAMADA";
-        this.calcularHoraFechaRetorno();
+        this.calcularTiempoRetorno();
     }
 
     
@@ -81,37 +81,26 @@ public class SalidaProgramada {
     public void setMyRuta(Ruta myRuta) {
         this.myRuta = myRuta;
     }   
-
+    public String mostrarHoraFechaSalida(){
+    String formatoSimple="";
+      SimpleDateFormat nuevoFormato = new SimpleDateFormat("HH:mm dd/MM/yyyy");
+      formatoSimple = nuevoFormato.format(fechaHora.getTime());
+      return formatoSimple;
+    
+    }
     private String cambiarFormato(){
       String formatoSimple="";
       SimpleDateFormat nuevoFormato = new SimpleDateFormat("HH:mm dd/MM/yyyy");
       formatoSimple = nuevoFormato.format(fechaHora.getTime());
       return formatoSimple;
     }
-    
-
-    private void calcularHoraFechaRetorno(){
-      switch(this.myRuta.getDestino()){
-          case "Bucaramanga": 
-              // Bug 5 fix: usar clone() para no modificar fechaHora al sumar horas
-              this.fechaHoraRetorno=(GregorianCalendar)this.fechaHora.clone();
-              this.fechaHoraRetorno.add(GregorianCalendar.HOUR_OF_DAY, 4);
-          break; 
-          case "Bogotá": 
-              this.fechaHoraRetorno=(GregorianCalendar)this.fechaHora.clone();
-              this.fechaHoraRetorno.add(GregorianCalendar.HOUR_OF_DAY, 13);
-          break;
-          case "Medellin": 
-              this.fechaHoraRetorno=(GregorianCalendar)this.fechaHora.clone();
-              this.fechaHoraRetorno.add(GregorianCalendar.HOUR_OF_DAY, 14);
-          break;
-          case "Cartagena": 
-              this.fechaHoraRetorno=(GregorianCalendar)this.fechaHora.clone();
-              this.fechaHoraRetorno.add(GregorianCalendar.HOUR_OF_DAY, 15);
-          break;
-      }
+    private void calcularTiempoRetorno(){
+        int horaFechaRuta=(this.myRuta.getHoraViaje()*2)+3;
+    this.fechaHoraRetorno=(GregorianCalendar)this.fechaHora.clone();
+              this.fechaHoraRetorno.add(GregorianCalendar.HOUR_OF_DAY, horaFechaRuta);
     }
-    
+
+   
     @Override
     public String toString() {
         return "\nidSalida: " + idSalida +

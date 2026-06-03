@@ -9,6 +9,7 @@ public class Ruta {
     private String codigo;
     private String origen;
     private String destino;
+    private int horaViaje;
     private float precioBoleto;
     
     public Ruta(){
@@ -19,11 +20,16 @@ public class Ruta {
     
     }
 
-    public Ruta(String codigo, String origen, String destino, float precioBoleto) {
+    public Ruta(String codigo, String origen, String destino,int horaViaje , float precioBoleto) {
         this.codigo = codigo;
         this.origen = origen;
         this.destino = destino;
         this.precioBoleto = precioBoleto;
+        this.horaViaje=horaViaje;
+    }
+
+    public int getHoraViaje() {
+        return horaViaje;
     }
 
     public String getCodigo() {
@@ -63,7 +69,8 @@ public class Ruta {
         return "\ncodigo= " + codigo + 
                 "\norigen= " + origen + 
                 "\ndestino= " + destino + 
-                "\nprecioBoleto= " + precioBoleto+"\n";
+                "\nPrecio Base= " + precioBoleto+
+                "\nHoras de viaje: " + this.horaViaje+"\n";
     }
     
     public String origenDestino(){

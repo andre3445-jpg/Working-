@@ -39,10 +39,10 @@ import java.util.ArrayList;
 
 
         private int determinarCapacidad(String tipo) {
-            if (tipo.equalsIgnoreCase("Ejecutivo")) {
+            if (tipo.equalsIgnoreCase("EJECUTIVO")) {
               return 30;
             }
-            if (tipo.equalsIgnoreCase("Normal")) {
+            if (tipo.equalsIgnoreCase("NORMAL")) {
               return 40;
             }
               return 0;
@@ -53,7 +53,7 @@ import java.util.ArrayList;
             }
         }
         
-        private int getCapacidad(){
+        public int getCapacidad(){
             return asientos.length;
         }
         public int capacidad(){
@@ -73,7 +73,7 @@ import java.util.ArrayList;
             return estado;
         }
 
-        public Asiento[] getAsientos() {
+        private Asiento[] getAsientos() {
             return asientos;
         }
 
