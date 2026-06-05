@@ -67,6 +67,14 @@ public class Ticket {
         this.valorPagar = valorPagar;
     }
 
+    public void setSilla(String silla) {
+        this.silla = silla;
+    }
+
+    public void setMyCliente(Cliente myCliente) {
+        this.myCliente = myCliente;
+    }
+
     public void setMySalida(SalidaProgramada mySalida) {
         this.mySalida = mySalida;
     }

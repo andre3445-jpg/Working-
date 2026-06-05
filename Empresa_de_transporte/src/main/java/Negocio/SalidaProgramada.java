@@ -25,6 +25,10 @@ public class SalidaProgramada {
     
     }
 
+    public String getEstadoSalida() {
+        return estadoSalida;
+    }
+
     public SalidaProgramada(String idSalida, GregorianCalendar fechaHora, Bus myBus, Ruta myRuta) {
         this.idSalida = idSalida;
         this.fechaHora = fechaHora;
@@ -72,6 +76,14 @@ public class SalidaProgramada {
         this.fechaHora = fechaHora;
     }   
 
+    public void setFechaHoraRetorno(GregorianCalendar fechaHoraRetorno) {
+        this.fechaHoraRetorno = fechaHoraRetorno;
+    }
+
+    public void setEstadoSalida(String estadoSalida) {
+        this.estadoSalida = estadoSalida;
+    }
+
    
 
     public void setMyBus(Bus myBus) {
@@ -88,7 +100,7 @@ public class SalidaProgramada {
       return formatoSimple;
     
     }
-    private String cambiarFormato(){
+    public String cambiarFormato(){
       String formatoSimple="";
       SimpleDateFormat nuevoFormato = new SimpleDateFormat("HH:mm dd/MM/yyyy");
       formatoSimple = nuevoFormato.format(fechaHora.getTime());
@@ -106,7 +118,8 @@ public class SalidaProgramada {
         return "\nidSalida: " + idSalida +
                 "\nfechaHora: " + cambiarFormato() +
                 "\nBus: " + myBus.getPlaca()+ 
-                "\nRuta: " + myRuta.origenDestino()+"\n";
+                "\nRuta: " + myRuta.origenDestino()+
+                "\nEstado: " + this.estadoSalida +"\n";
         
     }
     

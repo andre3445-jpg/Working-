@@ -8,18 +8,17 @@ import java.util.GregorianCalendar;
 import java.util.TreeSet;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.HashSet;
 
 public class Empresa {
 
     private ArrayList<Bus> myBuses;
     private ArrayList<Ruta> myRutas;
     private ArrayList<Cliente> myClientes;
+    private ArrayList<Conductor> myConductores;
     private ArrayList<SalidaProgramada> mySalidas;
     private ArrayList<Ticket> myTickets;
-
-    private Caja myCaja;//Agregado como atributo
-    // PROFESORA:   AQUI DEBE IR EL MONTO INICIAL DE LA CAJA, TOTAL VENDIDO.... IRIAN ACA
-    // O EN LA CLASE CAJA
+    private Caja myCaja;
 
     public Empresa() {
         this.myBuses = new ArrayList();
@@ -27,7 +26,8 @@ public class Empresa {
         this.myClientes = new ArrayList();
         this.mySalidas = new ArrayList();
         this.myTickets = new ArrayList();// abriendo memoria en ticket 
-
+        this.myCaja = new Caja();
+        this.myConductores = new ArrayList<>();
         this.inicializarBus();
         this.inicializarRuta();
         this.inicializarSalidas();
@@ -77,7 +77,11 @@ public class Empresa {
                 this.myBuses.get(1), this.myRutas.get(3)));
     }
 
-    /* RF1 GESTIÓN DE RUTAS*/
+    /*RF1 Parametrizar el sistema: gestionar rutas, buses y salidas (crear/listar). 
+    Validar unicidad (placa, codigoRuta, idSalida) y estados.*/
+    
+    
+    /* RF1.1 METODO PARA REGISTRAR RUTAS*/
     public String registrarRuta(String codigo, String origen, String destino, int hora, float precioBoleto) {
         String validar = "";
         validar = this.validarRuta(codigo, destino, origen);
@@ -89,6 +93,7 @@ public class Empresa {
         return "LA RUTA:\n" + nueva.toString() + "\nHA SIDO CREADA CON EXITO";
     }
 
+    //RF1.1.2 METODO PARA LISTAR LAS RUTAS
     public String listarRuta() {
         String me = "LISTA DE RUTAS ACTUALES:\n";
         for (Ruta r : myRutas) {
@@ -109,7 +114,7 @@ public class Empresa {
         return "CONTINUAR";
     }
 
-    /* RF1 Gestion de buses*/
+    /* RF1.2 METODO PARA REGISTRAR BUS*/
     public String registrarBus(String placa, String tipoServicio) {
         if (this.validarBus(placa)) {
             return "LA PLACA YA ESTA REGISTRADA";
@@ -119,13 +124,94 @@ public class Empresa {
         this.myBuses.add(nuevo);
         return "EL BUS:\n" + nuevo.toString() + "\nHA SIDO REGISTRADO CON EXITO";
     }
-
+    
+    //RF1.2.1 METODO PARA LISTAR BUSES
     public String listarBus() {
         String me = "LISTA DE BUSES ACTUALES:\n";
         for (Bus b : myBuses) {
             me += b.toString() + "\n";
 
         }
+        return me;
+    }
+
+    public ArrayList<String> listarBusSinConductorComboBox() {
+        ArrayList<String> me = new ArrayList<>();
+        for (Bus b : myBuses) {
+            if (b.getMyConductor() == null) {
+                me.add(b.getPlaca());
+            }
+        }
+        return me;
+    }
+
+    //Metodo para registrar los conductores
+    public String registrarConductor(String nombre, String cedula, String correo, String telefon, float sueldo) {
+        String me = "";
+        Conductor c = this.buscarConductor(cedula);
+        if (c != null) {
+            if (c.getCedula().equals(cedula) && (c.getNombre().equalsIgnoreCase(nombre))) {
+                return "EL CONDUCTOR YA SE ENCUENTRA REGISTRADO \n" + c.toString();
+            }
+            if (!c.getNombre().equalsIgnoreCase(nombre)) {
+                return "LA CEDULA " + cedula + " YA SE ENCUENTRA REGISTRADA PARA EL CONDUCTOR \n" + c.toString() + "\n\n POR FAVOR VERIFIQUE LOS DATOS";
+            }
+        }
+        this.myConductores.add(new Conductor(sueldo, nombre, cedula, correo, telefon));
+        me = " EL CONDUCTOR: \n" + this.myConductores.getLast().toString() + "\n\n REGISTRADO CON EXITO";
+        return me;
+    }
+
+    //metodo para buscar Conductor por su numero de cedula
+    private Conductor buscarConductor(String cedula) {
+        for (Conductor c : this.myConductores) {
+            if (c.getCedula().equals(cedula)) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    //metodo para mostrar los conductores no asignados a un bus
+    public ArrayList<String> listarConductoresSinBusCombobox() {
+        ArrayList<String> conductores = new ArrayList<>();
+        for (Conductor c : myConductores) {
+            if (c.isAsignado() == false) {
+                conductores.add(c.getCedula() + " " + c.getNombre());
+            }
+        }
+
+        return conductores;
+    }
+
+    //metodo para asignar conductor a un bus
+    public String asignarConductor(String cedula, String placa) {
+        String me = "";
+        Conductor c = this.buscarConductor(cedula);
+        Bus b = this.buscarBus(placa);
+        b.setMyConductor(c);
+        c.setAsignado(true);
+        me = "Conductor: " + c.getNombre() + "\n Cedula: " + c.getCedula() + "\n HA SIDO ASIGNADO AL BUS: " + b.getPlaca();
+        return me;
+    }
+
+    //Metodo para listar los buses en mantenimiento
+    public ArrayList<String> buscesManteniemiento() {
+        ArrayList<String> busces = new ArrayList<>();
+        for (Bus b : this.myBuses) {
+            if (b.getEstado().equalsIgnoreCase("MANTENIMIENTO")) {
+                busces.add(b.getPlaca());
+            }
+        }
+        return busces;
+    }
+
+    //Metodo para integrar de nuevo un bus en mantenimiento a su estado funcional
+    public String busFueraDeMantenimiento(String placa) {
+        String me = "";
+        Bus b = this.buscarBus(placa);
+        b.setEstado("DISPONIBLE");
+        me = "El Bus: " + b.getPlaca() + " \nSe encuentra nuevamente DISPONIBlE";
         return me;
     }
 
@@ -178,6 +264,9 @@ public class Empresa {
         }
         SalidaProgramada s = this.buscarSalidaProgramada(codSalida);
         Cliente c = this.buscarCliente(cedula);
+        if (this.maximoComprado(codSalida, cedula)) {
+            return "El cliente ya tiene pasaje para esta salida";
+        }
         float precio = this.valorParcialApagar(s, c, idaVuelta);
         float valorTotal = 0.0F;
         for (Integer i : sillas) {
@@ -186,13 +275,10 @@ public class Empresa {
             this.actualizarPasajero(1, c);
             valorTotal += precio;
         }
+        this.myCaja.actualizarValorTotal(valorTotal);
         String placa = this.buscarBusDeSalida(codSalida);
-        //int asient = Integer.parseInt(asiento);
-        //this.buscarBus(placa).ocuparAsiento(asiento);
+        me = this.ticketsImprimir(sillas) + "\n Total a pagar: " + valorTotal;
 
-        me = this.ticketsImprimir(sillas) + "\n Total a pagar: "+ valorTotal;
-
-//VAMOS ACA
         return me;
     }
 
@@ -217,6 +303,16 @@ public class Empresa {
 
     }
 
+    //Metodo para comprobar que el pasajero no tenga mas tickets de los permitidos en la salida programada
+    private boolean maximoComprado(String codSalida, String cedula) {
+        for (Ticket t : this.buscarTickets(this.buscarSalidaProgramada(codSalida))) {
+            if (t.getMyCliente().getCedula().equals(cedula)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     //Metodo para calcular el valor por puesto en una compra R2
     public float valorParcialApagar(SalidaProgramada s, Cliente c, boolean idaVuelta) {
         float descuentoCleiente = (float) (s.getMyRuta().getPrecioBoleto() * 0.15);
@@ -226,7 +322,7 @@ public class Empresa {
 
         total = s.getMyRuta().getPrecioBoleto();
         if (idaVuelta) {
-            total = (float) (total-descuentoIdaVuelta);
+            total = (float) (total - descuentoIdaVuelta);
         }
         if (c.getTipoPasajero().equalsIgnoreCase("PREFERENCIAL")) {
             total = total - descuentoCleiente;
@@ -283,11 +379,13 @@ public class Empresa {
     }
 
     /*Metodos de apoyo para combobox de la vista r2*/
-    public ArrayList listarSalidaPrograma() {
+    public ArrayList listarSalidaProgramaVigentes() {
         ArrayList<String> salida;
         salida = new ArrayList<String>();
         for (SalidaProgramada s : this.mySalidas) {
-            salida.add(s.getIdSalida() + " " + s.getMyRuta().getOrigen() + "-" + s.getMyRuta().getDestino() + "   " + s.getMyBus().getTipoServicio());
+            if (s.getEstadoSalida().equalsIgnoreCase("PROGRAMADA")) {
+                salida.add(s.getIdSalida() + " " + s.getMyRuta().getOrigen() + "-" + s.getMyRuta().getDestino() + "   " + s.getMyBus().getTipoServicio());
+            }
         }
         return salida;
     }
@@ -437,122 +535,281 @@ public class Empresa {
         }
         return me;
     }
-    
+
     /*REQUERIMIENTO FUNCIONAL 4 Cancelación de salida: cambiar estado a CANCELADA 
     y gestionar tiquetes VIGENTES (reprogramar automáticamente a otra salida PROGRAMADA
     de la misma ruta con cupo, o marcar REEMBOLSADO). Generar reporte del proceso.
-    */
-
-    public String cancelarReprogramarSalida(String codSalida){
-        SalidaProgramada s= this.buscarSalidaProgramada(codSalida);
-        Bus b= this.buscarBusReprogramar(s, codSalida).getFirst();
+     */
+    public String cancelarReprogramarSalida(String codSalida) {
+        SalidaProgramada s = this.buscarSalidaProgramada(codSalida);
+        Bus b = this.buscarBusReprogramar(s, codSalida).getFirst();
         SalidaProgramada s2;
-    String me="Si ves esto, ve a CancelarReprogramarSalida";
-    
-    if(b!=null){
-    Bus c=s.getMyBus();
-    s.setMyBus(b);
-    c.setEstado("MANTENIMIENTO");
-    me="BUS REASIGNADO "+s.getMyBus().getPlaca()+ "A LA SALIDA "+s.getIdSalida()+" ("+s.getMyRuta().origenDestino()+") "+s.getFechaHora();
-    }else{
-    
-        
+        String me = "Si ves esto, ve a CancelarReprogramarSalida";
+
+        if (b != null) {
+            Bus c = s.getMyBus();
+            s.setMyBus(b);
+            c.setEstado("MANTENIMIENTO");
+            me = "BUS REASIGNADO " + s.getMyBus().getPlaca() + "A LA SALIDA " + s.getIdSalida() + " (" + s.getMyRuta().origenDestino() + ") " + s.cambiarFormato();
+        } else {
+            me = this.reprogramarSalida(s);
+        }
+        return me;
     }
-    
-    
-    return me;
-    }
-    
+
     //Metodo para buscar un bus disponible en la brecha de tiempo que necesitamos para reprogramar r4
-    private ArrayList<Bus> buscarBusReprogramar(SalidaProgramada s, String placa){
-        ArrayList <Bus> posiblesBuses=new ArrayList<>();
-        
-        for(Bus b: this.myBuses){
+    private ArrayList<Bus> buscarBusReprogramar(SalidaProgramada s, String placa) {
+        ArrayList<Bus> posiblesBuses = new ArrayList<>();
+
+        for (Bus b : this.myBuses) {
             boolean disponible = true;
-            if(!b.getPlaca().equals(placa)){
-                for(SalidaProgramada sp: this.mySalidas){
+            if (!b.getPlaca().equals(placa)) {
+                for (SalidaProgramada sp : this.mySalidas) {
                     boolean cruce = false;
-                    if(b.getPlaca().equalsIgnoreCase(sp.getMyBus().getPlaca())){
-                      cruce=this.hayCruce(s.getFechaHora(), s.getFechaHoraRetorno(), sp.getFechaHora(),sp.getFechaHoraRetorno());
+                    if (b.getPlaca().equalsIgnoreCase(sp.getMyBus().getPlaca())) {
+                        cruce = this.hayCruce(s.getFechaHora(), s.getFechaHoraRetorno(), sp.getFechaHora(), sp.getFechaHoraRetorno());
                     }
-                    if(cruce){
-                       break;
+                    if (cruce) {
+                        break;
                     }
-                    
+
                 }
-               if(disponible){
-                posiblesBuses.add(b);
-                } 
+                if (disponible) {
+                    posiblesBuses.add(b);
+                }
             }
         }
-    
-    return posiblesBuses;}
-    
+
+        return posiblesBuses;
+    }
+
     //metodo para buscar las salidas en una brecha de un dia para reprogramar los puestos disponibles r4
-    private String reprogramarSalida(SalidaProgramada c){
-    String me="INREPROGRAMABLE";
-    ArrayList<SalidaProgramada> posiblesSalidas= this.opcionesParaReprogramarSalida(c);
-    if(posiblesSalidas.size()!=0){
-        for(SalidaProgramada sa: posiblesSalidas){
-        
+    private String reprogramarSalida(SalidaProgramada cancelada) {
+        StringBuilder reporte = new StringBuilder();
+
+        ArrayList<Ticket> pendientes = this.buscarTickets(cancelada);
+
+        ArrayList<SalidaProgramada> posiblesSalidas
+                = this.opcionesParaReprogramarSalida(cancelada);
+
+        if (posiblesSalidas.isEmpty()) {
+            return "IRREPROGRAMABLE";
         }
-    }
-    
-    return me;
-    }
-    
-    //Metodo para buscar posibles salidas disponibles para la reprogramacion
-    private ArrayList<SalidaProgramada> opcionesParaReprogramarSalida(SalidaProgramada s){
-        ArrayList<SalidaProgramada> salidas= new ArrayList<>();
-        for(SalidaProgramada sc: this.mySalidas){
-           if(this.esReprogramable(s, sc)){
-               salidas.add(sc);
-           }
+
+        int totalReprogramados = 0;
+        int totalReembolsados = 0;
+
+        reporte.append("CANCELACION DE SALIDA: ")
+                .append(cancelada.getIdSalida())
+                .append("\n\n");
+
+        for (SalidaProgramada destino : posiblesSalidas) {
+
+            if (pendientes.isEmpty()) {
+                break;
+            }
+
+            ArrayList<Ticket> ticketsDestino = this.buscarTickets(destino);
+
+            ArrayList<String> sillasLibres = this.obtenerSillasDisponibles(destino, ticketsDestino);
+            int indice = 0;
+            ArrayList<Ticket> procesados = new ArrayList<>();
+
+            for (Ticket ticket : pendientes) {
+
+                if (indice >= sillasLibres.size()) {
+                    break;
+                }
+
+                String sillaAnterior = ticket.getSilla();
+                ticket.setSilla(sillasLibres.get(indice));
+                ticket.setMySalida(destino);
+
+                ticketsDestino.add(ticket);
+
+                reporte.append("- ")
+                        .append(ticket.getIdTicket())
+                        .append(" Silla ")
+                        .append(sillaAnterior)
+                        .append(" -> REPROGRAMADO a ")
+                        .append(destino.getIdSalida())
+                        .append(" Silla ")
+                        .append(ticket.getSilla())
+                        .append("\n");
+
+                procesados.add(ticket);
+
+                totalReprogramados++;
+                indice++;
+            }
+
+            pendientes.removeAll(procesados);
         }
-        
-    
-    return salidas;
+
+        for (Ticket ticket : pendientes) {
+
+            reporte.append("- ")
+                    .append(ticket.getIdTicket())
+                    .append(" Silla ")
+                    .append(ticket.getSilla())
+                    .append(" -> REEMBOLSADO (sin cupo)\n");
+            ticket.setEstadoTicket("REEMBOLSADO");
+            this.myCaja.actualizarReembolso(ticket.getValorPagar());
+            totalReembolsados++;
+        }
+
+        reporte.append("\nTOTAL REPROGRAMADOS: ").append(totalReprogramados);
+        reporte.append("\nTOTAL REEMBOLSADOS: ").append(totalReembolsados);
+        cancelada.setEstadoSalida("CANCELADA");
+        return reporte.toString();
     }
-    
-    
-    //metodo para buscar los tickets de una salida especifica r4
-    private ArrayList<Ticket> buscarTickets(SalidaProgramada s){
-    ArrayList<Ticket> tickets= new ArrayList<>();
-        for(Ticket t : this.myTickets){
-            if(t.getMySalida().getIdSalida().equals(s.getIdSalida())){
-            tickets.add(t);
+
+    //Metodo para obtener las sillas disponibles r4
+    private ArrayList<String> obtenerSillasDisponibles(
+            SalidaProgramada salida,
+            ArrayList<Ticket> ticketsSalida) {
+
+        ArrayList<String> libres = new ArrayList<>();
+
+        int capacidad = salida.getMyBus().getCapacidad();
+
+        HashSet<String> ocupadas = new HashSet<>();
+
+        for (Ticket t : ticketsSalida) {
+            ocupadas.add(t.getSilla());
+        }
+
+        for (int i = 1; i <= capacidad; i++) {
+
+            String silla = String.format("%02d", i);
+
+            if (!ocupadas.contains(silla)) {
+                libres.add(silla);
             }
         }
-        
-    return tickets;}
-    
-    //Metodo para verificar si hay cruce de horarios entre los buses para reprogramar la salida r4
-    private boolean hayCruce(GregorianCalendar salida1, GregorianCalendar retorno1, GregorianCalendar salida2, GregorianCalendar retorno2){
-    return salida1.before(retorno2) && retorno1.after(salida2);
-}
-    //metodo para comparar con otra salida, teniendo en cuenta que la diferencia maxima es de un dia para poder ser reprogramada
-    public boolean esReprogramable( SalidaProgramada salidaCancelada,
-        SalidaProgramada salidaRepro) {
 
-    // Verificar mismo destino
-    if (!salidaCancelada.getMyRuta().getDestino().equals(salidaRepro.getMyRuta().getDestino())) {
-        return false;
+        return libres;
     }
 
-    // Obtener diferencia en milisegundos
-    long tiempo1 = salidaCancelada.getFechaHora().getTimeInMillis();
-    long tiempo2 = salidaRepro.getFechaHora().getTimeInMillis();
+    //Metodo para buscar posibles salidas disponibles para la reprogramacion
+    private ArrayList<SalidaProgramada> opcionesParaReprogramarSalida(SalidaProgramada s) {
+        ArrayList<SalidaProgramada> salidas = new ArrayList<>();
+        for (SalidaProgramada sc : this.mySalidas) {
+            if (this.esReprogramable(s, sc)) {
+                salidas.add(sc);
+            }
+        }
 
-    long diferencia = Math.abs(tiempo1 - tiempo2);
+        return salidas;
+    }
 
-    // 24 horas en milisegundos
-    long unDia = 24L * 60 * 60 * 1000;
+    //metodo para buscar los tickets de una salida especifica r4
+    private ArrayList<Ticket> buscarTickets(SalidaProgramada s) {
+        ArrayList<Ticket> tickets = new ArrayList<>();
+        for (Ticket t : this.myTickets) {
+            if (t.getMySalida().getIdSalida().equals(s.getIdSalida())) {
+                tickets.add(t);
+            }
+        }
 
-    return diferencia <= unDia;
-}
-    //metodo para recorrer los buses y buscar los que se pueden usar para reprogramar r4
-    
-    
-    /*requerimiento 5*/
+        return tickets;
+    }
 
+    //Metodo para verificar si hay cruce de horarios entre los buses para reprogramar la salida r4
+    private boolean hayCruce(GregorianCalendar salida1, GregorianCalendar retorno1, GregorianCalendar salida2, GregorianCalendar retorno2) {
+        return salida1.before(retorno2) && retorno1.after(salida2);
+    }
+
+    //metodo para comparar con otra salida, teniendo en cuenta que la diferencia maxima es de un dia para poder ser reprogramada
+    public boolean esReprogramable(SalidaProgramada salidaCancelada,
+            SalidaProgramada salidaRepro) {
+
+        // Verificar mismo destino
+        if (!salidaCancelada.getMyRuta().getDestino().equals(salidaRepro.getMyRuta().getDestino())) {
+            return false;
+        }
+
+        // Obtener diferencia en milisegundos
+        long tiempo1 = salidaCancelada.getFechaHora().getTimeInMillis();
+        long tiempo2 = salidaRepro.getFechaHora().getTimeInMillis();
+
+        long diferencia = Math.abs(tiempo1 - tiempo2);
+
+        // 24 horas en milisegundos
+        long unDia = 24L * 60 * 60 * 1000;
+
+        return diferencia <= unDia;
+    }
+
+    //metodo para dar por finalizada las salidas programadas
+    public String finalizarSalidas() {
+        String me = "SALIDAS FINALIZADAS:\n";
+        GregorianCalendar horaSistema = new GregorianCalendar();
+        for (SalidaProgramada s : this.mySalidas) {
+            if (horaSistema.after(s.getFechaHoraRetorno())) {
+                s.setEstadoSalida("FINALIZADA");
+            } else if (horaSistema.before(s.getFechaHoraRetorno()) && horaSistema.after(s.getFechaHora())) {
+                s.setEstadoSalida("EN VIAJE");
+            }
+            me += s.toString() + "\n";
+        }
+
+        return me;
+    }
+
+    /*requerimiento 5* caja*/
+    public String resumenCajaRuta() {
+        String me = "VENTAS POR RUTA\n";
+        for (Ruta r : this.myRutas) {
+            float suma = 0.0F;
+            for (Ticket t : this.myTickets) {
+                if (r.getCodigo().equals(t.getMySalida().getMyRuta().getCodigo())) {
+                    suma += t.getValorPagar();
+                }
+            }
+            //this.myCaja.actualizarValorTotal(suma);
+            me += r.getCodigo() + " " + r.getOrigen() + "-" + r.getDestino() + ": $" + suma + "\n";
+        }
+
+        return me;
+    }
+
+    public String totalCaja() {
+        String me = " ";
+        me += this.myCaja.getTotalVentas();
+        return me;
+    }
+
+    public String ingresarMontoInicialCaja(float monto) {
+        String me = "";
+        this.myCaja.setCajaInicial(monto);
+        me += this.myCaja.getCajaInicial();
+        return me;
+    }
+
+    public String mostrarReembolso() {
+        String me = "";
+        me += this.myCaja.getTotalReembolsos();
+        return me;
+    }
+
+    public String mostrarCajaInicial() {
+        String me = "";
+        me += this.myCaja.getCajaInicial();
+        return me;
+    }
+
+    public String mostrarIngresoNeto() {
+        String me = "";
+        me += this.myCaja.calcularIngresoNeto();
+        return me;
+    }
+
+    public String mostrarCajaFinal() {
+        String me = "";
+        me = this.myCaja.calcularCajaFinal();
+
+        return me;
+
+    }
 }

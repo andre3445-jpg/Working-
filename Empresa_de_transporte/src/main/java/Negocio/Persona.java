@@ -59,7 +59,7 @@ private String telefon;
 
     @Override
     public String toString() {
-        return "Persona{" + "nombre=" + nombre + ", cedula=" + cedula + ", correo=" + correo + ", telefon=" + telefon + '}';
+        return "Nombre: " + nombre + "\nCedula: " + cedula + "\nCorreo: " + correo + "\nTelefono: " + telefon;
     }
 
     

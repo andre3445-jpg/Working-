@@ -251,9 +251,16 @@ public class FormVenderTicket extends javax.swing.JFrame {
            String correo= this.txtCorreo.getText();
            String telef= this.txtTelefono.getText();
            String codSalida=this.extraerCodigo();
+           if(asientosSelec.length==0){
+           this.txtMensaje.setText("SELECCIONE UN ASIENTO");
+           return;
+           
+           }
+           if(cedula.isEmpty()||correo.isEmpty()||nombre.isEmpty()||telef.isEmpty()){
+           this.txtMensaje.setText("INGRESE TODOS LOS DATOS");
+           return;
+           }
            txtMensaje.setText(this.myPrincipal.getMyEmpresa().comprarTicket(codSalida, (1), nombre, cedula, correo, telef, this.seleccionados, this.chkIdayVuelta.isSelected()));
-           
-           
            
            this.panelAsientos.removeAll();
            String[] estadoAsientos= this.myPrincipal.getMyEmpresa().estadoAsientosBotones(this.extraerCodigo());
@@ -284,7 +291,7 @@ public class FormVenderTicket extends javax.swing.JFrame {
     private void inicializarSalidasProgramadas(){
         ArrayList<String> iniciar;
         iniciar=new ArrayList<>();
-        iniciar=this.myPrincipal.getMyEmpresa().listarSalidaPrograma();
+        iniciar=this.myPrincipal.getMyEmpresa().listarSalidaProgramaVigentes();
         
         for(int i=0; i<iniciar.size(); i++){
           this.cmbSalida.addItem(iniciar.get(i));
@@ -406,17 +413,14 @@ private boolean sonAsientosJuntos(int a, int b) {
     int menor = Math.min(a, b);
     int mayor = Math.max(a, b);
 
-    // Deben ser consecutivos (diferencia de 1)
+    
     if (mayor - menor != 1) return false;
 
-    // No pueden cruzar el pasillo: lado izquierdo = posiciones 1,2 de la fila
-    // lado derecho = posiciones 3,4 de la fila
-    // posición dentro de la fila: 1=col1, 2=col2, 3=col3, 4=col4
+    
     int posA = ((menor - 1) % 4) + 1; // 1, 2, 3 o 4
     int posB = ((mayor - 1) % 4) + 1;
 
-    // Par válido izquierda: posA=1 posB=2
-    // Par válido derecha:   posA=3 posB=4
+   
     return (posA == 1 && posB == 2) || (posA == 3 && posB == 4);
 }
 private int[] obtenerAsientosSeleccionados() {

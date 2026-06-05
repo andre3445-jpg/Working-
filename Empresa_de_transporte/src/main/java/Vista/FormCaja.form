@@ -27,123 +27,83 @@
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="jLabel4" min="-2" pref="141" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="lblCodigo4" min="-2" pref="52" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="lblRuta4" min="-2" pref="52" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="lblCodigo3" min="-2" pref="52" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="lblRuta3" min="-2" pref="52" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="lblCodigo2" min="-2" pref="52" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="lblRuta2" min="-2" pref="52" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="lblCodigo1" min="-2" pref="52" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="lblRuta1" min="-2" pref="52" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jLabel39" min="-2" pref="89" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="lblTotalVendido" min="-2" pref="52" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabel31" min="-2" pref="52" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                              <Component id="jLabel28" min="-2" pref="52" max="-2" attributes="0"/>
+                              <Component id="Jlabel22" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="lblRembolso" min="-2" pref="52" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                      <Component id="Jlabel23" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="lblCajaFinal" min="-2" pref="71" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="lblSubtotal2" min="-2" pref="52" max="-2" attributes="0"/>
-                                  <Component id="lblSubtotal1" min="-2" pref="52" max="-2" attributes="0"/>
-                                  <Component id="lblSubtotal3" min="-2" pref="52" max="-2" attributes="0"/>
-                                  <Component id="lblSubtotal4" min="-2" pref="52" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace pref="76" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="167" max="-2" attributes="0"/>
                               <Component id="jLabel25" min="-2" pref="65" max="-2" attributes="0"/>
                           </Group>
-                      </Group>
-                      <EmptySpace pref="142" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblTotalVendido" min="-2" pref="52" max="-2" attributes="0"/>
                           <Component id="jLabel40" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel39" min="-2" pref="68" max="-2" attributes="0"/>
-                          <Component id="lblRembolso" min="-2" pref="52" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="Jlabel24" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="lblIngresoNeto" min="-2" pref="52" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblIngresoNeto" min="-2" pref="52" max="-2" attributes="0"/>
-                          <Component id="Jlabel22" alignment="1" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="181" max="32767" attributes="0"/>
                   </Group>
               </Group>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+              <Component id="txtMensaje" min="-2" pref="415" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="34" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel40" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="jLabel39" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="Jlabel22" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblTotalVendido" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="lblRembolso" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="lblIngresoNeto" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="38" max="32767" attributes="0"/>
-              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+              <Component id="jLabel40" min="-2" pref="30" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel31" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="jLabel28" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="jLabel25" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel39" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="lblTotalVendido" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="Jlabel22" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="lblRembolso" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="18" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="Jlabel24" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="lblIngresoNeto" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="Jlabel23" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="lblCajaFinal" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblCodigo1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="lblRuta1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="lblSubtotal1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblCodigo2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="lblRuta2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="lblSubtotal2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblCodigo3" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="lblRuta3" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="lblSubtotal3" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblCodigo4" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="lblRuta4" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="lblSubtotal4" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+              <Component id="jLabel25" min="-2" pref="30" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="txtMensaje" min="-2" pref="121" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -151,112 +111,76 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="lblRembolso">
       <Properties>
-        <Property name="text" type="java.lang.String" value="---------"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblIngresoNeto">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="---------"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblSubtotal4">
-      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="33" green="0" red="ff" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="---------"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblTotalVendido">
       <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="cc" green="0" red="0" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="---------"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel25">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="SUBTOTAL"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblSubtotal3">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="---------"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblSubtotal2">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="---------"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel28">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="RUTA"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblSubtotal1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="---------"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblRuta1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="---------"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel31">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="CODIGO"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblRuta3">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="---------"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblRuta2">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="---------"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblCodigo1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="---------"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblRuta4">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="---------"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblCodigo2">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="---------"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblCodigo3">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="---------"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblCodigo4">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="---------"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel4">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Ventas por Ruta- Detalle"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel39">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Rembolsos"/>
+        <Property name="text" type="java.lang.String" value="Total vendido:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel40">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Total Vendido"/>
+        <Property name="text" type="java.lang.String" value="REPORTE DIARIO - RUTAS COLOMBIA "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="Jlabel22">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ingreso neto"/>
+        <Property name="text" type="java.lang.String" value="Total reembolsado:"/>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="txtMensaje">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextArea" name="txtTexto">
+          <Properties>
+            <Property name="columns" type="int" value="20"/>
+            <Property name="rows" type="int" value="5"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="Jlabel23">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Caja final: "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="Jlabel24">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ingreso neto:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblIngresoNeto">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="0" type="rgb"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="33" green="ff" red="33" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="---------"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCajaFinal">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="---------"/>
       </Properties>
     </Component>
   </SubComponents>

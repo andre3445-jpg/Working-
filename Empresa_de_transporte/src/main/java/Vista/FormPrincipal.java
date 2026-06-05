@@ -5,6 +5,8 @@
 package Vista;
 
 import Negocio.Empresa;
+import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -20,13 +22,14 @@ public class FormPrincipal extends javax.swing.JFrame {
     private FormRegistrarRuta myFormRuta;
     private FormCaja myFormCaja;
     private FormVenderTicket myFormVender;
-    
+
     
  
  
     public FormPrincipal() {
         initComponents();
         myEmpresa =new Empresa();
+        this.inicializarCaja();
         
     }
 
@@ -175,6 +178,24 @@ public class FormPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> new FormPrincipal().setVisible(true));
     }
+    
+    private void inicializarCaja() {
+    while (true) {
+        String entrada = JOptionPane.showInputDialog( null, "INGRESE EL MONTO PARA LA CAJA INICIAL" );
+        if (entrada == null) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar un monto para continuar.", "Error", JOptionPane.ERROR_MESSAGE);
+            continue;
+        }
+        if (!entrada.matches("[0-9]+")) {
+            JOptionPane.showMessageDialog( null, "Error: Solo se permiten caracteres numéricos.", "Error", JOptionPane.ERROR_MESSAGE );
+            continue;
+        }
+        float caja = Float.parseFloat(entrada);
+        this.myEmpresa.ingresarMontoInicialCaja(caja);
+        JOptionPane.showMessageDialog(null, "CAJA INICIAL REGISTRADA: " + caja, "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+        break; 
+    }
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdBus;

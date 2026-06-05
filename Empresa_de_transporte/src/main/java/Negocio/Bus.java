@@ -15,6 +15,7 @@ import java.util.ArrayList;
         private String tipoServicio;
         private String estado;
         private Asiento[] asientos;
+        private Conductor myConductor;
 
 
         public Bus(){
@@ -33,6 +34,7 @@ import java.util.ArrayList;
             this.estado = "DISPONIBLE";
             this.asientos = new Asiento[this.determinarCapacidad(tipoServicio)];
             this.crearAsientos();
+            this.myConductor=null;
         }
         // PROFESORA: AQUI FALTA OBLIGATORIAMENTE EL LLAMADO DEL METODO PRIVADO DE ACTUALIZAR LOS 
         //PUESTOS CREADO...
@@ -69,6 +71,10 @@ import java.util.ArrayList;
             return tipoServicio;
         }
 
+    public Conductor getMyConductor() {
+        return myConductor;
+    }
+
         public String getEstado() {
             return estado;
         }
@@ -93,7 +99,12 @@ import java.util.ArrayList;
         public void setAsientos(Asiento[] asientos) {
             this.asientos = asientos;
         }
+
+    public void setMyConductor(Conductor myConductor) {
+        this.myConductor = myConductor;
+    }
        
+        
        /**PROFESORA:  OJOO QUE BUS DEBE MANIPULAR LAS PARTES..**/
 
         public String mostrarAsiento(){
